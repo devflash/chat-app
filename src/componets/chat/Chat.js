@@ -11,6 +11,7 @@ import Modal from '../modal/Modal';
 import RoomInput from '../chatList/createRoom/roomInput/RoomInput';
 import Options from '../options/Options';
 import useWindowWidth from '../hooks/useWindowWidth';
+import { signOutUser } from '../../utils';
 
 function Chat({rooms, user, dispatch}) {
     const { roomId } = useParams();
@@ -79,7 +80,7 @@ function Chat({rooms, user, dispatch}) {
                 console.log('Show Rooms');
                 break;
             case 'SIGN_OUT':
-                console.log('SignOut');
+                signOutUser(dispatch);
                 break;
         }
     }

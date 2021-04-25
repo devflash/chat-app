@@ -13,7 +13,7 @@ import Login from './componets/Login/Login';
 
 const initialState = {
   rooms: [],
-  user: {user: {displayName: 'Mruegsh'}}
+  user: null
 }
 
 const reducerFunction = (state, action) => {
@@ -27,6 +27,10 @@ const reducerFunction = (state, action) => {
       return {
         ...state,
         user: action.user
+      }
+    case 'USER_SIGN_OUT':
+      return {
+        initialState
       }
   }
 }
@@ -42,10 +46,10 @@ function App() {
               <Sidebar rooms={state.rooms} dispatch={dispatch} user={state.user} showSidebar={state.showSidebar}/>
               <Switch>
                 <Route path="/rooms/:roomId">
-                  <Chat rooms={state.rooms} user={state.user}/>
+                  <Chat rooms={state.rooms} user={state.user} dispatch={dispatch}/>
                 </Route>
                 <Route path="/">
-                  <Chat rooms={state.rooms} user={state.user}/>
+                  <Chat rooms={state.rooms} user={state.user} dispatch={dispatch}/>
                 </Route>
               </Switch>
           </Router>
