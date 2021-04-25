@@ -45,7 +45,7 @@ function Chat({rooms, user, dispatch}) {
             .onSnapshot((snapshot) => setMessages(snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data()
-            }))));
+            }, (error) => dispatch({type: 'SET_SERVICE_ERROR', isError: true})))));
            
         }
         setMessage('');
@@ -63,6 +63,7 @@ function Chat({rooms, user, dispatch}) {
                 .doc(roomId)
                 .collection('messages')
                 .add(payload)
+                .catch(() => dispatch({type: 'SET_SERVICE_ERROR', isError: true}))
         }
         setMessage('');
 

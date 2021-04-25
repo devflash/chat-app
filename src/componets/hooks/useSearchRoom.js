@@ -21,19 +21,19 @@ const useSearchRoom = (query, rooms=[], dispatch) => {
         // }).catch((error) => {
         //     console.log(error);
         // });
-        database.collection('rooms').onSnapshot((snapshot) => {
-            rooms = snapshot.docs.map((doc) => (
-                {
-                    id: doc.id,
-                    data: {
-                        ...doc.data(),
-                        avatar: `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 40)}.svg`
+            database.collection('rooms').onSnapshot((snapshot) => {
+                rooms = snapshot.docs.map((doc) => (
+                    {
+                        id: doc.id,
+                        data: {
+                            ...doc.data(),
+                            avatar: `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 40)}.svg`
+                        }
                     }
-                }
-            ))
-            dispatch({type: 'INITIALIZE_ROOMS', rooms});
-            setFilteredRooms(rooms);
-        });
+                ))
+                dispatch({type: 'INITIALIZE_ROOMS', rooms});
+                setFilteredRooms(rooms);
+            }, (error) => dispatch({type: 'SET_SERVICE_ERROR', isError: true}));
     }, []);
 
     useEffect(() => {

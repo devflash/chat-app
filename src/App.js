@@ -12,10 +12,11 @@ import Chat from './componets/chat/Chat';
 import Login from './componets/Login/Login';
 import { auth } from './firebase';
 import RingLoader from 'react-spinners/RingLoader';
-
+import ErrorToast from './componets/errorToast/ErrorToast'
 const initialState = {
   rooms: [],
-  user: null
+  user: null,
+  isError: true
 }
 
 const reducerFunction = (state, action) => {
@@ -34,6 +35,11 @@ const reducerFunction = (state, action) => {
       return {
         initialState
       }
+      case 'SET_SERVICE_ERROR':
+        return {
+          ...state,
+          isError: action.isError
+        }
   }
 }
 
@@ -70,6 +76,7 @@ function App() {
   }
   return (
     <div className="App">
+      <ErrorToast error={state.isError} dispatch={dispatch}/>
       {state.user ? (
         <div className="app__body">
             <Router>
