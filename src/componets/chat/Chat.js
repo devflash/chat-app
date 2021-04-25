@@ -11,7 +11,8 @@ import Modal from '../modal/Modal';
 import RoomInput from '../chatList/createRoom/roomInput/RoomInput';
 import Options from '../options/Options';
 import useWindowWidth from '../hooks/useWindowWidth';
-import { signOutUser } from '../../utils';
+import useSignOutUser from '../../hooks';
+import {formatDate} from '../../utils';
 
 function Chat({rooms, user, dispatch}) {
     const { roomId } = useParams();
@@ -20,14 +21,11 @@ function Chat({rooms, user, dispatch}) {
     const [message, setMessage] = useState('');
     const [isDialogOpen, toggleDialog] = useState(false);
     const windowWidth = useWindowWidth();
+    const signOutUser = useSignOutUser(dispatch);
     const options = [
         {
             id: 'CREATE_ROOM',
             name: 'New room'
-        },
-        {
-            id: 'SHOW_ROOMS',
-            name: 'Show rooms'
         },
         {
             id: 'SIGN_OUT',
@@ -55,11 +53,10 @@ function Chat({rooms, user, dispatch}) {
 
     const sendMessage = () => {
         const payload = {
-            name: user?.user?.displayName,
+            name: user?.displayName,
             message,
             timeStamp: firebase.firestore.FieldValue.serverTimestamp()
         }
-        console.log(payload);
         if(message.length){
             database
                 .collection('rooms')
@@ -67,6 +64,7 @@ function Chat({rooms, user, dispatch}) {
                 .collection('messages')
                 .add(payload)
         }
+        setMessage('');
 
            
     }
@@ -76,11 +74,8 @@ function Chat({rooms, user, dispatch}) {
             case 'CREATE_ROOM':  
                 toggleDialog(true);
                 break;
-            case 'SHOW_ROOMS':
-                console.log('Show Rooms');
-                break;
             case 'SIGN_OUT':
-                signOutUser(dispatch);
+                signOutUser();
                 break;
         }
     }
@@ -94,7 +89,7 @@ function Chat({rooms, user, dispatch}) {
                 <Avatar src={roomInfo?.data?.avatar} />
                 <div className="chat__info">
                     <h1>{roomInfo?.data?.name}</h1>
-                    <p>Last activity: Tue 18, 2020 7:20 PM</p>
+                   {messages.length > 0 && messages[messages.length-1]?.data.timeStamp && <p>Last activity: {formatDate(messages[messages.length-1]?.data.timeStamp)}</p>}
                 </div>
                 <Options userOptions={options} handleOptionClick={handleOptionClick}/>
             </div>
