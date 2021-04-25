@@ -45,7 +45,7 @@ function Chat({rooms, user, dispatch}) {
             .onSnapshot((snapshot) => setMessages(snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data()
-            }, (error) => dispatch({type: 'SET_SERVICE_ERROR', isError: true})))));
+            }),(error) => dispatch({type: 'SET_SERVICE_ERROR', isError: true}))));
            
         }
         setMessage('');
@@ -90,7 +90,7 @@ function Chat({rooms, user, dispatch}) {
                 <Avatar src={roomInfo?.data?.avatar} />
                 <div className="chat__info">
                     <h1>{roomInfo?.data?.name}</h1>
-                   {messages.length > 0 && messages[messages.length-1]?.data.timeStamp && <p>Last activity: {formatDate(messages[messages.length-1]?.data.timeStamp)}</p>}
+                   {/* {messages.length > 0 && messages[messages.length-1]?.data.timeStamp && <p>Last activity: {formatDate(messages[messages.length-1]?.data.timeStamp)}</p>} */}
                 </div>
                 <Options userOptions={options} handleOptionClick={handleOptionClick}/>
             </div>
