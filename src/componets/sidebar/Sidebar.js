@@ -6,12 +6,14 @@ import Options from '../options/Options';
 import RoomInput from '../chatList/createRoom/roomInput/RoomInput';
 import Modal from '../modal/Modal';
 import useWindowWidth from '../hooks/useWindowWidth';
+import useSignOutUser from '../../hooks';
 
-function Sidebar({rooms, dispatch, user, showSidebar}) {
+function Sidebar({rooms, dispatch, user}) {
     const [query, setQuery] = useState('');
     const [isDialogOpen, toggleDialog] = useState(false);
     const windowWidth = useWindowWidth();
-    console.log(windowWidth);
+    const signOutUser = useSignOutUser(dispatch);
+    
     const options = [
         {
             id: 'CREATE_ROOM',
@@ -29,7 +31,7 @@ function Sidebar({rooms, dispatch, user, showSidebar}) {
                 toggleDialog(true);
                 break;
             case 'SIGN_OUT':
-                console.log('SignOut');
+                signOutUser();
                 break;
         }
     }

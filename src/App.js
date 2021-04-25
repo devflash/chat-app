@@ -52,6 +52,7 @@ function App() {
         dispatch({type: 'USER_SIGN_IN', userData});
         setLoader(false);
       }else{
+        dispatch({type: 'USER_SIGN_OUT'});
         setLoader(false);
       }
     });
