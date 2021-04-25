@@ -1,0 +1,68 @@
+.chat__message{
+    margin-bottom: 10px;
+}
+.chat__message .recipient{
+    font-size: 12px;
+    font-weight: bold;
+}
+.chat__message .recipient.orange{
+    color: #f39c12;
+}
+.chat__message .recipient.purple{
+    color: #273c75;
+}
+.chat__message .recipient.blue{
+    color: #0097e6;
+}
+.chat__message .recipient.green{
+    color: #4cd137;
+}
+.chat__message .recipient.yellow{
+    color: #f1c40f;
+}
+.chat__message .message{
+    background-color: #fff;
+    width: fit-content;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 5px;
+    margin-top: 5px;
+    position: relative;
+}
+.chat__message .timeStamp{
+    display: inline-block;
+    font-size: 10px;
+    width: 100%;
+}
+
+.sender__msg{
+    align-self: flex-end;
+}
+
+.sender__msg .message{
+    background-color: #74b9ff;
+    margin-left: auto;
+    color: #fff;
+}
+.sender__msg .timeStamp{
+    text-align: right;
+}
+.message::before{
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-style: solid;
+}
+.message.received::before{
+    border-width: 0 10px 10px 0px;
+    border-color: transparent #fff transparent transparent;
+    top: 0;
+    left: -4px;
+}
+.message.sent::before{
+    border-width: 0px 0px 10px 10px;
+    border-color: transparent transparent transparent #74b9ff;
+    top: 0;
+    right: -4px;
+}

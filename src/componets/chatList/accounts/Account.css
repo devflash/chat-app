@@ -1,0 +1,24 @@
+.account{
+    padding: 10px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+.account:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.account__info{
+    margin-left: 20px;
+}
+.account__info > h1{
+    font-size: 15px;
+    text-align: left;
+    color: #000;
+}
+
+.account__info > p{
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+}

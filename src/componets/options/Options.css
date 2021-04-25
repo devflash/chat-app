@@ -1,0 +1,35 @@
+.dropdown{
+    position: relative;
+    margin-left: auto;
+}
+.dropdown .dropdown__options{
+    position: absolute;
+    background-color: #fff;
+    width: max-content;
+    right: 18px;
+    top: 14px;
+    box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.6);
+    cursor: pointer;
+    display: none;
+}
+.dropdown__options ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.dropdown__options ul li{
+    font-size: 14px;
+    padding: 10px 5px;
+}
+.dropdown__options ul li:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+.dropdown .MuiSvgIcon-root{
+    color: #fff;
+    cursor: pointer;
+    margin: 0;
+}
+.dropdown .MuiSvgIcon-root:hover ~ .dropdown__options,
+.dropdown__options:hover{
+    display: block;
+}

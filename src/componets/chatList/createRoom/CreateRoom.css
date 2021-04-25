@@ -1,0 +1,32 @@
+.create__room{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.create__room .content{
+    margin: 0 auto;
+    text-align: center;
+}
+.create__room  p{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.create__room .create__btn{
+    border: none;
+    outline: none;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+    cursor: pointer;
+}
+
+.create__btn:hover{
+   background-color: #2980b9;
+   box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
