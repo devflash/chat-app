@@ -3,7 +3,7 @@ import './CreateRoom.css';
 import Model from '../../modal/Modal';
 import RoomInput from './roomInput/RoomInput';
 
-function CreateRoom() {
+function CreateRoom({dispatch}) {
     const [isDialogOpen, toggleDialog] = useState(false);
 
     return (
@@ -14,7 +14,7 @@ function CreateRoom() {
             </div>
             
             <Model isOpen={isDialogOpen} title="Create Room" onDialogClose={() => toggleDialog(false)}>
-                {isDialogOpen && <RoomInput />}
+                {isDialogOpen && <RoomInput dispatch={dispatch} />}
             </Model>
         </div>
 

@@ -19,7 +19,7 @@ function ChatList({ query, rooms, dispatch }) {
             }
 
         </div>) : (
-            <CreateRoom  />
+            <CreateRoom dispatch={dispatch} />
         )
         }
     </>
