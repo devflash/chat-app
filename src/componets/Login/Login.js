@@ -1,17 +1,23 @@
 import React,{useState} from 'react';
 import './Login.css';
 import { auth, provider } from '../../firebase';
+import firebase from 'firebase';
 import RingLoader from 'react-spinners/RingLoader';
 
 function Login({dispatch}) {
     const [loader, setLoader] = useState(false);
     const handleGoogleLogin = () => {
         setLoader(true);
-        auth.signInWithPopup(provider).then((user) =>{
-            console.log("user loggedIn" , user);
-            dispatch({type:'USER_SIGN_IN', user});
-            setLoader(false);
-        }).catch((error) => alert("Something went wrong!!!"))
+        auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+            auth.signInWithPopup(provider).then((user) =>{
+                const userData = {
+                    displayName: user.user.displayName,
+                    profileImg: user.user.photoURL
+                }
+                dispatch({type:'USER_SIGN_IN', userData});
+                setLoader(false);
+            }).catch((error) => alert("Something went wrong!!!"));
+        }).catch((error) => alert("Something went wrong!!!"));
 
     };
     if(loader) return <RingLoader loading={loader} size={150}/>
