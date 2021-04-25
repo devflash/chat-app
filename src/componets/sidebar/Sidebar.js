@@ -37,8 +37,8 @@ function Sidebar({rooms, dispatch, user, showSidebar}) {
     return (
         <div className="sidebar">
             <div className="sidebar__header">
-                <img src={user?.user?.photoURL ? user.user.photoURL :"/images/profile.jpg"} alt="profileImage" />
-                <p className="sidebar__profileName">{user?.user?.displayName}</p>
+                <img src={user?.profileImg ? user.profileImg :"/images/profile.jpg"} alt="profileImage" />
+                <p className="sidebar__profileName">{user?.displayName}</p>
                 {
                     windowWidth < 640 && 
                     <Options userOptions={options} handleOptionClick={handleOptionClick}/>

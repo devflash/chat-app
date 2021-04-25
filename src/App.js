@@ -1,5 +1,5 @@
 
-import {useReducer} from 'react';
+import {useReducer, useEffect, useState} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,6 +10,8 @@ import './App.css';
 import Sidebar from './componets/sidebar/Sidebar';
 import Chat from './componets/chat/Chat';
 import Login from './componets/Login/Login';
+import { auth } from './firebase';
+import RingLoader from 'react-spinners/RingLoader';
 
 const initialState = {
   rooms: [],
@@ -26,7 +28,7 @@ const reducerFunction = (state, action) => {
     case 'USER_SIGN_IN' :
       return {
         ...state,
-        user: action.user
+        user: action.userData
       }
     case 'USER_SIGN_OUT':
       return {
@@ -37,9 +39,36 @@ const reducerFunction = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducerFunction, initialState);
+  const [loader, setLoader] = useState(false);
+  
+  useEffect(() => {
+    setLoader(true);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if(user){
+        const userData = {
+          displayName: user.displayName,
+          profileImg: user.photoURL
+      }
+        dispatch({type: 'USER_SIGN_IN', userData});
+        setLoader(false);
+      }else{
+        setLoader(false);
+      }
+    });
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+  if(loader){
+    return (
+      <div className="App">
+        {loader && <RingLoader loading={loader} size={150}/>}
+      </div>
+    )
+  }
   return (
     <div className="App">
-
       {state.user ? (
         <div className="app__body">
             <Router>
